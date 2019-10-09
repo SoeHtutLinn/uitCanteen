@@ -1,0 +1,93 @@
+.profile-section {
+	border-top: 1px solid #077D8A;
+}
+
+.profile-img i {
+	color: #077D8A;
+}
+
+.profile-name {
+	text-align: center;
+	color: #077D8A;
+}
+
+.nav-profile {
+	width: 50%;
+	text-align: center;
+
+}
+
+.nav-pills .nav-link {
+    border-radius: 0 !important;
+    border: 1px #077D8A solid !important;
+    margin: 5px;
+
+}
+
+.nav-pills .nav-link.active {
+    color: #fff !important;
+    background-color: #077D8A !important;
+}
+
+.tab-content {
+	background-color: #077D8A;
+	color: #fff;
+}
+
+.orderlist-item {
+	border-bottom: 1px solid #ffff;
+}
+
+.logout {
+	margin-top: 10px;
+}
+
+.btn-logout {
+    color: #077D8A !important;
+    background-color: #fff !important;
+    border: 1px #077D8A solid !important;
+    border-radius: 0 !important;
+}
+
+.noti-text {
+	border-bottom: 1px solid #ffff;
+}
+
+.noti-text p {
+	margin-bottom: 0 !important;
+}
+
+.modal {
+	color: black;
+}
+
+.modal-content {
+	border-radius: 0 !important;
+	color: #077D8A;
+}
+
+.shopname {
+	border-bottom: 1px solid #077D8A;
+}
+
+table td,tr {
+	color: #077D8A;
+}
+
+.modal-footer {
+	border-top: 0 !important;
+}
+
+.table td {
+	border-top: 0 !important;
+}
+
+.voc-total {
+	border-top: 1px solid #077D8A;
+}
+
+.btn-ok {
+	color: #fff !important;
+    background-color: #077D8A !important;
+    border-color: #077D8A !important;
+}

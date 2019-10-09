@@ -1,0 +1,68 @@
+#carthead {
+	height: 70px;
+}
+
+#carthead h3 {
+	color: #077D8A;
+}
+
+#shopvoc {
+	background-color: #077D8A;
+}
+
+.shopvoc-header {
+	height: 50px;
+}
+
+.shopvoc-header h3 {
+	color: #fff;
+}
+
+.shopvoc-itemslist {
+	border-top: 1px solid #ffff;
+}
+
+.shopvoc-item-info {
+	padding: 10px;
+	color: #fff;
+	width: 60%;
+}
+
+.shopvoc-item-info p {
+	margin-bottom: 0 !important;
+	line-height: 24px;
+}
+
+.shopvoc-item-delete {
+	color: #fff;
+}
+
+.item-total {
+	border-top: 1px solid #ffff;
+	color: #fff;
+}
+
+.item-time {
+	color: #fff;
+}
+
+.checkout {
+	border-top: 1px solid #ffff;
+	height: 80px;
+}
+
+.btn-checkout {
+    color: #077D8A !important;
+    background-color: #fff !important;
+    border-color: #fff !important;
+    margin: 0 auto;
+    border-radius: 0 !important;
+}
+
+.btn-checkout i {
+	margin-left: 10px;
+}
+
+.profile-img {
+	margin: 0 auto;
+}

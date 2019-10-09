@@ -1,0 +1,126 @@
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+	.shop1 img, .overlay {
+		width: 100%;
+		height: 260px;
+	}
+	.food-img img {
+		width: 180px;
+		height: 135px;
+	}
+
+	.food-img {
+		border-bottom: 2px #ffff solid;
+	}
+
+	.food-title {
+		border-bottom: 2px #ffff solid;
+	}
+
+	.inc-dec {
+		border-bottom: 2px #ffff solid;
+	}
+
+	.shopvoc-item-img img {
+		width: 140px;
+	}
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+	.shop1 img, .overlay {
+		width: 100%;
+		height: 300px;
+	}
+	.food-img img {
+		width: 180px;
+		height: 135px;
+	}
+
+	.food-img {
+		border-bottom: 2px #ffff solid;
+	}
+
+	.food-title {
+		border-bottom: 2px #ffff solid;
+	}
+
+	.inc-dec {
+		border-bottom: 2px #ffff solid;
+	}
+
+	.shopvoc-item-img img {
+		width: 140px;
+	}
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+	.shop1 img, .overlay {
+		width: 100%;
+		height: 320px;
+	}
+	.food-img img {
+		width: 300px;
+		height: 135px;
+	}
+
+	.food-img {
+		border-bottom: 2px #ffff solid;
+	}
+
+	.food-title {
+		border-bottom: 2px #ffff solid;
+	}
+
+	.inc-dec {
+		border-bottom: 2px #ffff solid;
+	}
+
+	.shopvoc-item-img img {
+		width: 240px;
+	}
+
+} 
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+	.shop1 img, .overlay {
+		width: 100%;
+		height: 250px;
+	}
+
+	.food-img img {
+		width: 170px;
+		height: 135px;
+	}
+
+	.food-img {
+		border-left: 2px #ffff solid;
+	}
+
+	.shopvoc-item-img img {
+		width: 300px;
+	}
+} 
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+	.shop1 img, .overlay {
+		width: 70%;
+		height: 300px;
+	}
+
+	.food-img img {
+		width: 220px;
+		height: 135px;
+	}
+
+	.food-img {
+		border-left: 2px #ffff solid;
+	}
+
+	.shopvoc-item-img img {
+		width: 350px;
+	}
+}
