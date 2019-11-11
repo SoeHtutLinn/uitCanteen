@@ -15,18 +15,20 @@ class CreateOrderDetailsTable extends Migration
     {
         Schema::create('order_details', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->biginteger('orderId')->unsigned();
-            $table->biginteger('menuId')->unsigned();
+            $table->bigInteger('orderId')->unsigned();
+            $table->bigInteger('menuId')->unsigned();
             $table->integer('quantity');
-            $table->foreign('orderId')
-            ->references('id')
-            ->on('orders')
-            ->onUpdate('cascade')
-            ->onDelete('cascade');
+            $table->timestamps();
 
             $table->foreign('menuId')
             ->references('id')
             ->on('menus')
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
+
+            $table->foreign('orderId')
+            ->references('id')
+            ->on('orders')
             ->onUpdate('cascade')
             ->onDelete('cascade');
         });

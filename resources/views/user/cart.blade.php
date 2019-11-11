@@ -42,16 +42,19 @@
 				<div class="bg-color">
 					<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 						<li class="nav-item active">
-							<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+							<a class="nav-link" href="/canteen">Home <span class="sr-only">(current)</span></a>
+						</li>
+
+						@foreach($shop as $link)
+						<li class="nav-item">
+							<a class="nav-link" href="/menu/{{ $link->id }}">{{ $link->name }}</a>
+						</li>
+						@endforeach
+						<li class="nav-item">
+							<a class="nav-link" href="/cart">Cart</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="oasis.html">Oasis</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">Link</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">Link</a>
+							<a class="nav-link" href="/profile">Profile</a>
 						</li>
 					</ul>
 				</div>
@@ -62,10 +65,10 @@
 		<h3>Your Cart</h3>
 	</div><!--carthead-->
 	<div id="shopvoc">
-
 	@if(!empty($order))
 		<form action="order" method="post" id="form">
-	
+		@csrf
+		
 		@foreach($order as $shopKey=> $item)
 		
 			<div id="Menu{{$shopKey}}">
@@ -74,7 +77,6 @@
 				</div>
 				<div id="Shop{{$shopKey}}">
 				@foreach($item->menu as $key=> $data)
-				
 				<div class="shopvoc-itemslist" id="shopvoc-item{{$key}}">
 					<div class="shopvoc-item d-flex">
 						<div class="shopvoc-item-img">
@@ -83,29 +85,35 @@
 
 						<div class="shopvoc-item-info">
 							<p>{{$data[0]->name}}</p>
+							<input type="hidden" name="item{{$shopKey}}{{$key}}" value="{{$data[0]->id}}">
 							<p id ="price" value ='{{$data[0]->price}}'>{{$data[0]->price}}</p><p> MMK</p>
 							<div class="d-flex">
 								<div>Quantity</div>
 								<div>
 
-									<select name="item-qty" id="menuQty" onchange="change('{{$item->shopId}}','{{$key}}','{{$item->totalQty}}')">
+									<select name="item-qty{{$shopKey}}{{$key}}" id="menuQty" onchange="change('{{$item->shopId}}','{{$key}}','{{$shopKey}}')" onclick="qtyChange('{{$shopKey}}','{{$key}}')">
 										<option hidden value="{{$item->quantity[$key]}} ">{{$item->quantity[$key]}}</option>
 
-										@for($i = 1; $i<=$item->totalQty; $i++)
-										<option value="{{$i}}">{{$i}}</option>
-										@endfor
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
 										
+
 									</select>
 								</div>
 							</div>
 						</div>
 						<div class="shopvoc-item-delete align-self-center">
-							<i class="fas fa-trash-alt fa-lg" onclick="remove('{{$item->shopId}}','{{$key}}','{{$data[0]->id}}')"></i>
+							<i class="fas fa-trash-alt fa-lg" onclick="remove('{{$shopKey}}','{{$key}}','{{$data[0]->id}}','{{$item->shopId}}')"></i>
 						</div>
 					</div>
 				</div>
 				
-				
+				<input type="hidden" name="shop{{$shopKey}}" value="{{$item->shopId}}">
+				<!-- <input type="hidden" name="quantity{{$shopKey}}{{$key}}" value="{{$item->quantity[$key]}}"> -->
+
 				@endforeach
 				
 				</div>
@@ -115,54 +123,37 @@
 					</div>
 					<div class="p-1">
 
-						<h5 id="money">{{$item->total}}</h5> MMK
+						<h5 id="money"></h5> MMK
 					</div>
 				</div>
-				<div class="item-time d-flex justify-content-around">
-					<div class="p-1">
-						<h5>Time</h5>
-						
-					</div>
-					<div class="p-1">
-						
-						<select name="item-qty" id="time" class="form-control">
-							@for($i = $item->time->hour; $i < 17; $i++)
-								@if($i<11)
-								{
-									<option value="{{$i}} - {{$i+1}}">{{$i}} AM - {{$i+1}} AM</option>
-								}
-								@elseif($i == 11)
-								{
-									<option value="{{$i}} - {{$i+1}}">{{$i}} AM - {{($i+1)}} PM</option>
-								}
-								@elseif($i == 12)
-								{
-									<option value="{{$i}} - {{$i+1}}">{{$i}} PM - {{($i+1)-12}} PM</option>
-								}
-								@else
-								{
-									<option value="{{$i}} - {{$i+1}}">{{$i-12}} PM - {{($i+1)-12}} PM</option>
-								}
-								@endif
-
-								$item->time->hour = $i;
-
-							
-							@endfor
-						</select>
-					</div>
-				</div>
-
-				<input type="hidden" name="shop{{$item->shopId}}" value="{{$item->shopId}}">
+				
 				<input type="hidden" name="total{{$shopKey}}" id="total{{$shopKey}}"  value="">
 					
 		</div>
 		
 		@endforeach
+		
+		<div class="item-time d-flex justify-content-around">
+			<div class="p-1">
+				<h5>Time</h5>
+				
+			</div>
+			<div class="p-1">
+				
+				<select name="time" id="time" class="form-control">
+					$order[0]->time->addHours(1);
+					@foreach($order[0]->timeArray as $timeDetail => $time)
+							<option value="{{$order[0]->time->addHours(1)}}">{{$time}}</option>
+					@endforeach
+				</select>
+			</div>
+		</div>
+
+
 		<input type="hidden" name="user" value="{{Auth::user()->id}}">
 		<input type="hidden" name="shopcount" id="shopcount" value="{{$shopKey}}">
 		<div class="checkout d-flex align-items-center">
-			<button class="btn btn-checkout" type="submit">Okay<i class="fas fa-caret-right fa-lg"></i></button>
+			<button class="btn btn-checkout" type="submit" onclick="deleteCookies()">Okay<i class="fas fa-caret-right fa-lg"></i></button>
 		</div>
 		</form>
 	@else

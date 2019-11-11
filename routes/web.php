@@ -50,3 +50,13 @@ Route::get('/menu/{url}', 'menuController@menu');
 Route::post('/newMenu', 'shopController@newMenu');
 Route::post('/flag', 'shopController@flag');
 Route::get('/canteen', 'menuController@home');
+
+Route::post('/order', 'HomeController@order'); //order
+
+Route::get('/newOrder', 'shopController@newOrder');
+Route::get('/acceptedOrder', 'shopController@acceptedOrders');
+Route::get('/readyOrder', 'shopController@readyOrders');
+Route::get('/unAccept/{id}', 'orderController@unAccept');
+Route::get('/accept/{id}', 'orderController@accept');
+Route::get('/ready/{id}', 'orderController@ready');
+Route::get('/taken/{id}', 'orderController@taken');

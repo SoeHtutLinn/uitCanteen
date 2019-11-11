@@ -17,9 +17,9 @@ class CreateOrdersTable extends Migration
             $table->bigIncrements('id');
             $table->biginteger('studentId')->unsigned();
             $table->integer('shopId')->unsigned();
-            $table->string('takingTime');
+            $table->date('takingTime');
             $table->bigInteger('total');
-            $table->boolean('flag')->default('0');
+            $table->string('flag')->default('default');
             $table->string('orderCode');
             $table->timestamps();
 

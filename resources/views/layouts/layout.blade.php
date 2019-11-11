@@ -38,10 +38,10 @@
 					</span>
 				</button>
 				<div class="logo">
-					<img src="/uploads/uitlogo.png" alt="uitlogo">
+					<a href="/canteen"><img src="/uploads/uitlogo.png" alt="uitlogo"></a>
 				</div>
 				<div class="cart">
-					<i class="fas fa-shopping-cart fa-2x"></i>
+					<a href="/cart"><i class="fas fa-shopping-cart fa-2x"></i></a>
 				</div>
 			</nav>
 			<div class="collapse tog-akc" id="navbarToggleExternalContent">

@@ -1,16 +1,56 @@
 
-function change(id,key,qty)
+function change(id,key,shopKey)
 {
 
-	total(id);
-	count(id);
-	var container = $("#Shop"+id);
+	total(shopKey);
+	var container = $("#Shop"+shopKey);
+
 	var cookieQty = getCookie('quantity'+id).split(',');
 	cookieQty[key] = container.find('#shopvoc-item'+key).find('#menuQty').val();
 	setCookie('quantity'+id, cookieQty, 1);
+
+	var quantity = 0;
+	container.children().each(function()
+	{
+		quantity += Number($(this).find('#menuQty').val()) || 0;
+
+	});
 }
 
-function remove(id,key,m_id)
+function qtyChange(shopKey,key)
+{
+
+	var container = $("#Shop"+shopKey);
+	var quantity = 0;
+	container.children().each(function()
+	{
+		
+		quantity += Number($(this).find('#menuQty').val()) || 0;
+
+	});
+
+	container.find('#shopvoc-item'+key).find('select').empty();
+	
+	if(quantity<6)
+	{
+		var qtyDetail = container.find('#shopvoc-item'+key).find('#menuQty').val();
+		var reqQty = 5-(quantity - qtyDetail);
+		console.log(reqQty);
+
+		for(var i = 1; i<= reqQty; i++ )
+		{
+
+			container.find('select').append("<option value='"+i+"'>"+i+"</option>");
+		
+			
+		}
+	}
+		
+
+
+}
+
+function remove(id,key,m_id,shopId)
 {
 
 	var container = $("#Shop"+id);
@@ -19,33 +59,36 @@ function remove(id,key,m_id)
 	total(id);
 	var amount = Number($("#Menu"+id).find('#money').text());
 
+
 	alert(amount);
 	if(amount == 0)
 	{
 		$('#Menu'+id).hide();
 	}
-	var cookieQty = getCookie('quantity'+id).split(',');
-	var cookieMenu = getCookie('menu'+id).split(',');
+	var cookieQty = getCookie('quantity'+shopId).split(',');
+	var cookieMenu = getCookie('menu'+shopId).split(',');
 
 	cookieQty.splice(cookieMenu.indexOf(m_id),1);
 	cookieMenu.splice(cookieMenu.indexOf(m_id),1);
-	setCookie('quantity'+id, cookieQty, 1);
-	setCookie('menu'+id, cookieMenu, 1);
+	setCookie('quantity'+shopId, cookieQty, 1);
+	setCookie('menu'+shopId, cookieMenu, 1);
 }		
 		
 function total(id) 
 {
+		
 	 	var total = 0;
 		var container = $("#Shop"+id);
 
 		container.children().each(function(){
 
-		var quantity = Number($(this).find('#menuQty').val());
+		var quantity = Number($(this).find('#menuQty').val()) || 0;
 		var price = Number($(this).find('#price').text() );
 		total = Number((total+price * quantity));
 		
 		$("#Menu"+id).find('#money').text(total);
 		});
+		$("#Menu"+id).find('#total'+id).val(total);
 }
 
 function count(id)
@@ -82,12 +125,12 @@ $(document).ready(function(){
 
 				container.children().each(function(){
 
-				var quantity = Number($(this).find('#menuQty').val());
+				var quantity = Number($(this).find('#menuQty').val()) || 0;
 				var price = Number($(this).find('#price').text() );
-				alert("quant="+quantity);
-				alert("price="+price);
-				total[a] = Number((total[a]+price * quantity));
-				alert(total[a]);
+				
+				total[a] = Number((total[a]+ price * quantity));
+				
+				
 				$("#Menu"+a).find('#money').text(total[a]);
 				$("#Menu"+a).find('#total'+a).val(total[a]);
 

@@ -85,13 +85,129 @@ class shopController extends Controller
 
          
          return redirect('ownerMenu');
+    }
+
+    public function newOrder()
+    {
+        $newOrder = \App\order::where('shopId',Auth::user()->id)->where('flag','default')->get();
+        if(!empty ( $newOrder[0] ))
+        {
+           foreach ($newOrder as $orderDetail) 
+            {
+                $menu = \App\orderDetail::where('orderId',$orderDetail->id)->get();
+
+                foreach ($menu as $menuDetail) 
+                {
+
+                    $menus[] = \App\menu::where('id',$menuDetail->menuId)->get();
+                    $quantity[] = $menuDetail->quantity;
+                }
+
+                $orders[] = (object) array(
+                    'id' => $orderDetail->id,
+                    'user' => \App\user::where('id',$orderDetail->studentId)->get('name'),
+                    'menus' => $menus,
+                    'quantity' => $quantity,
+                    'time' => $orderDetail->takingTime
+                    );
                 
 
+                $menus = null;
+                $quantity = null;
+            }
+            @dd($newOrder);
+            return view('shop.newOrder',compact('orders')); 
+        }
+        $orders = 0;
+        return view('shop.newOrder',compact('orders')); 
         
-       
-        
-        
-
     }
+
+    public function acceptedOrders()
+    {
+        $accepted = \App\order::where('shopId',Auth::user()->id)->where('flag','T')->get();
+
+        if(!empty ( $accepted[0] ))
+        {
+            
+           foreach ($accepted as $orderDetail) 
+            {
+                $menu = \App\orderDetail::where('orderId',$orderDetail->id)->get();
+
+                foreach ($menu as $menuDetail) 
+                {
+
+                    $menus[] = \App\menu::where('id',$menuDetail->menuId)->get();
+                    $quantity[] = $menuDetail->quantity;
+                }
+
+                $orders[] = (object) array(
+                    'id' => $orderDetail->id,
+                    'user' => \App\user::where('id',$orderDetail->studentId)->get('name'),
+                    'menus' => $menus,
+                    'quantity' => $quantity,
+                    'time' => $orderDetail->takingTime
+                    );
+                $menus = null;
+                $quantity = null;
+            }
+            
+            
+           
+            
+        }
+        else
+        {
+            
+            $orders = 0;
+        }
+        
+        return view('shop.acceptedOrders',compact('orders')); 
+        
+    }
+
+    public function readyOrders()
+    {
+        $ready = \App\order::where('shopId',Auth::user()->id)->where('flag','R')->get();
+
+        if(!empty ( $ready[0] ))
+        {
+            
+           foreach ($ready as $orderDetail) 
+            {
+                $menu = \App\orderDetail::where('orderId',$orderDetail->id)->get();
+
+                foreach ($menu as $menuDetail) 
+                {
+
+                    $menus[] = \App\menu::where('id',$menuDetail->menuId)->get();
+                    $quantity[] = $menuDetail->quantity;
+                }
+
+                $orders[] = (object) array(
+                    'id' => $orderDetail->id,
+                    'user' => \App\user::where('id',$orderDetail->studentId)->get('name'),
+                    'menus' => $menus,
+                    'quantity' => $quantity,
+                    'time' => $orderDetail->takingTime
+                    );
+                $menus = null;
+                $quantity = null;
+            }
+            
+            
+           
+            
+        }
+        else
+        {
+            
+            $orders = 0;
+        }
+        
+        return view('shop.readyOrders',compact('orders')); 
+        
+    }
+
 
 }
